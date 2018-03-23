@@ -18,5 +18,6 @@ cd /root
 
 curl https://sh.rustup.rs -sSf > rustup.sh
 chmod a+x rustup.sh
-
 ./rustup.sh -y
+mv /root/.cargo/bin/* /usr/local/bin/
+rustup completions bash > /etc/bash_completion.d/rustup.bash-completion
