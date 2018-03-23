@@ -31,39 +31,4 @@ fedora-rust image nightly build. An example Dockerfile:
 ```
 FROM docker pull automatikdonn/fedrust:latest
 
-# create a user
-RUN useradd project -u 1000 -d /home/project -G wheel; passwd --stdin project <<< 'weakpw'
-
-# install dependencies needed for building your project
-RUN dnf -y install freetype-devel portaudio-devel SDL2-devel tmux zlib-devel; dnf clean all
-
-# don't forget LD_LIBRARY_PATH for rustc
-RUN echo -e '\nexport LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib' >> /home/project/.bashrc
-
-# a nicer command prompt
-RUN echo "export PS1='[\u@\h \W]\$ '" >> /home/project/.bashrc
-
-VOLUME ["/home/project/my_project_directory"]
-USER project
-ENV HOME /home/project
-CMD ["/usr/bin/tmux"]
-```
-
-Build your customized project image:
-
-```
-docker build -t myname/my_project_image .
-```
-
-Create a container, you'll get a shell where you can run rustc and cargo:
-
-```
-docker run --name my_project_2015_01_05 -i -t -v /home/myname/projects/my_project:/home/project/my_project_directory
-```
-
-Re-use a previously created container in case the newest nightly makes
-you feel dizzy:
-
-```
-docker start -a -i my_project_2015_01_02
 ```

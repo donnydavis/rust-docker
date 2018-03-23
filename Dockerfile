@@ -13,16 +13,17 @@
 FROM fedora:latest
 MAINTAINER Donny Davis <donny@fortnebula.com>
 
+ADD rust-install/rebuild-counter /usr/local/share/rust-install/rebuild-counter
+
 RUN dnf -y update; dnf clean all
 
 # fundamental packages
 RUN dnf -y install file gcc make man sudo tar; dnf clean all
+
+ENV LD_LIBRARY_PATH /usr/local/lib
+ADD rust-install /usr/local/share/rust-install
+
 # pre-built:
-RUN curl https://sh.rustup.rs -sSf > rustup.sh
-RUN chmod +x rustup.sh
-RUN ./rustup.sh -y
-RUN source .profile
-RUN rustup default nightly
-RUN mv .cargo/bin/* /usr/local/bin
+RUN /usr/local/share/rust-install/download-and-install.sh
 
 CMD ["/bin/bash"]
