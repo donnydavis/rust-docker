@@ -1,4 +1,4 @@
-fedora-rust
+fedrust
 ===========
 
 Docker image with Rust programming language and Cargo package manager.
@@ -22,14 +22,14 @@ Usage
 -----
 
 ```
-docker pull dockingbay/fedora-rust:nightly
+docker pull automatikdonn/fedrust:latest
 ```
 
 The intended use case is to base your own per-project images on the
 fedora-rust image nightly build. An example Dockerfile:
 
 ```
-FROM dockingbay/fedora-rust:nightly
+FROM docker pull automatikdonn/fedrust:latest
 
 # create a user
 RUN useradd project -u 1000 -d /home/project -G wheel; passwd --stdin project <<< 'weakpw'
