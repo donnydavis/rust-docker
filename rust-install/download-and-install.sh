@@ -16,7 +16,7 @@ set -exo pipefail
 
 cd /root
 
-curl -O https://static.rust-lang.org/rustup.sh
+curl https://sh.rustup.rs -sSf > rustup.sh
 chmod a+x rustup.sh
 
-./rustup.sh
+./rustup.sh -y
